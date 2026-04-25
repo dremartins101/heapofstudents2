@@ -10,14 +10,20 @@ class Student {
 	private:
 		std::string firstName;
 		std::string lastName;
-		Address address;
-		Date birthDate;
-		Date gradDate;
+		// pointers to heap objs
+		Address* address;
+		Date* birthDate;
+		Date* gradDate;
 		int creditHours;
 	public:
 		Student();
+		Student~(); // destructor to clean heap mem
 		void init(std::string StudentString);
 		void printStudent();
+
+		std::string getLastName();
+		std::string getFirstName();
+		int getCreditHours();
 		std::string getLastFirst();
 }; //end student class
 

@@ -1,20 +1,103 @@
 #include <iostream>
 #include "date.h"
+#include <vector>
+#include <string>
+#include <algorithm>
 #include "address.h"
 #include "student.h"
+#include <fstream>
 
-void testAddress();
-void testDate();
-void testStudent();
+// prototypes
+void loadStudents(std::vector<Student*>& students);
+void delStudents(std::vector<Student*>& students);
+void printStudents(std::vector<Student*>& students);
+void showStudentNames(std::vector<Student*>& students);
+void findStudent(std::vector<Student*>& students);
+void delStudents(std::vector<Student*>& students);
+
+//void testAddress();
+//void testDate();
+//void testStudent();
 
 int main(){
-  std::cout << "Hello!" << std::endl;
-  testDate();
-  testAddress();
-  testStudent();
+  std::vector<Student*> students;
+
+  
+  loadStudents(students);
+  
+  // Menu
+  std::string choice = "";
+  while (choice != "0") {
+	  std::cout << "\n0) Quit" << std::endl;
+	  std::cout << "1) Print all student names" << std::endl;
+	  std::cout << "2) Print all student data" << std::endl;
+	  std::cout << "3) Find a student" << std::endl;
+	  std::cout << "\nPlease choose 0-3: ";
+	  std::cin >> choice;
+	  std::cin.ignore();
+
+	  if (choice == "1") {
+		  showStudentNames(students);
+	} else if (choice == "2"){
+		printStudents(students);
+	} else if (choice == "3"){
+		findStudent(students);
+	}
+}
+
+delStudents(students);
+  
   return 0;
 } // end main
 
+
+void loadStudents(std::vector<Student*>& students){
+	std::ifstream file("students.csv");
+	std::string line;
+
+	if (file.is_open()){
+		while (getline(file, line)) {
+			if (line.length() > 0) {
+				Student* s = new Student();
+				s->init(line);
+				students.push_back(s);
+			}
+		}
+		file.close();
+		std::cout << "Successfully loaded " << students.size(); << " students" << std::endl
+		} else {
+			std::cout << "Could not open students.csv" << std::endl;
+		}
+} // end loadStudents
+
+void showStudentNames(std::vector<Student*>& students){
+	for (auto s : students) {
+		std::cout << s->getLastFirst() << std::endl;
+	}
+} // end showStudentNames
+
+void printStudents(std::vector<Student*>& students){
+	for (auto s : students) {
+		s->printStudent();
+		std::cout << "__________________________________" << std::endl;
+	}
+} // end printStudents
+
+void delStudents(std::vector<Student*>& students){
+	for (size_t i = 0; i < students.size(); i++){
+		delete students[i];
+	}
+	students.clear();
+} // end delStudents
+ 
+void findStudent(std::vector<Student*>& students){
+	std::string searchTerm;
+	std::cout << "last name of student: ";
+	std::getline(std::cin, searchTerm);
+
+	bool found = false;
+	for (auto s : students) {
+		if
 void testAddress(){
   Address a;
   a.init("123 W Main St", "Muncie", "IN", "47303");
