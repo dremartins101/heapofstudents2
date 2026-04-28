@@ -17,7 +17,7 @@ class Student {
 		int creditHours;
 	public:
 		Student();
-		Student~(); // destructor to clean heap mem
+		~Student(); // destructor to clean heap mem
 		void init(std::string StudentString);
 		void printStudent();
 

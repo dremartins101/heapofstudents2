@@ -4,10 +4,20 @@
 #include "student.h"
 
 Student::Student(){
+    address = new Address();
+    birthDate = new Date();
+    gradDate = new Date();
+
     firstName = "";
     lastName = "";
     creditHours = 0;
 } // end constructor
+
+Student::~Student(){
+	delete address;
+	delete birthDate;
+	delete gradDate;
+} // end destructor
 
 void Student::init(std::string studentString){
 	std::stringstream ss(studentString);
@@ -21,11 +31,11 @@ void Student::init(std::string studentString){
 	getline(ss, zip, ',');
 	getline(ss, bday, ',');
 	getline(ss, gday, ',');
-	getline(ss, credits, ',');
+	getline(ss, credits);
 
-	address.init(street, city, state, zip);
-	birthDate.init(bday);
-	gradDate.init(gday);
+	address->init(street, city, state, zip);
+	birthDate->init(bday);
+	gradDate->init(gday);
 
 	// convert credits to int
 	creditHours = std::stoi(credits);
@@ -33,14 +43,18 @@ void Student::init(std::string studentString){
 
 void Student::printStudent(){
 	std::cout << firstName << " " << lastName << std::endl;
-	address.printAddress();
+	address->printAddress();
 	std::cout << "DOB: ";
-	birthDate.printDate();
+	birthDate->printDate();
 	std::cout << "Grad: ";
-	gradDate.printDate();
+	gradDate->printDate();
 	std::cout << "Credits: " << creditHours << std::endl;
 } // end printstudent
  
+std::string Student::getLastName() { return lastName; }
+std::string Student::getFirstName() { return firstName; }
+int Student::getCreditHours() { return creditHours; }
+
 std::string Student::getLastFirst(){
 	return lastName + ", " + firstName;
 } // end getlastfirst
