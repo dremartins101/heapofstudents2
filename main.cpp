@@ -64,8 +64,9 @@ void loadStudents(std::vector<Student*>& students){
 			}
 		}
 		file.close();
-		std::cout << "Successfully loaded " << students.size(); << " students" << std::endl
-		} else {
+		std::cout << "Successfully loaded " << students.size() << " students" << std::endl;
+	}
+		 else {
 			std::cout << "Could not open students.csv" << std::endl;
 		}
 } // end loadStudents
@@ -94,10 +95,32 @@ void findStudent(std::vector<Student*>& students){
 	std::string searchTerm;
 	std::cout << "last name of student: ";
 	std::getline(std::cin, searchTerm);
+	
+
+	for (auto &c : searchTerm){
+		c = std::tolower(c);
+	}
 
 	bool found = false;
 	for (auto s : students) {
-		if
+		std::string tempName = s->getLastName();
+		for (auto &c : tempName){
+			c = std::tolower(c);
+		}
+
+
+		if (tempName.find(searchTerm) != std::string::npos)
+		{
+			s->printStudent();
+			std::cout << "________________________";
+			found = true;
+		}
+	}
+	if (!found) {
+		std::cout << "No matches found for: " << searchTerm << std::endl;
+	}
+} // end findStudent
+ 
 void testAddress(){
   Address a;
   a.init("123 W Main St", "Muncie", "IN", "47303");
