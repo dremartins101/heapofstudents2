@@ -2,6 +2,11 @@
 #include <string>
 #include <sstream>
 #include "student.h"
+#include "date.h"
+#include "address.h"
+#include <fstream>
+#include <vector>
+#include <algorithm>
 
 Student::Student(){
     firstName = "";
