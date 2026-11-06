@@ -16,6 +16,7 @@ class Student {
 		int creditHours;
 	public:
 		Student();
+		~Student();
 		void init(std::string StudentString);
 		void printStudent();
 		std::string getLastFirst();

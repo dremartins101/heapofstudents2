@@ -49,3 +49,4 @@ void Student::printStudent(){
 std::string Student::getLastFirst(){
 	return lastName + ", " + firstName;
 } // end getlastfirst
+ 

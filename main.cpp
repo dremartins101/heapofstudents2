@@ -1,18 +1,42 @@
 #include <iostream>
-#include "date.h"
-#include "address.h"
+#include <string>
+#include <fstream>
+#include <vector>
 #include "student.h"
 
-void testAddress();
-void testDate();
-void testStudent();
+//void testAddress();
+//void testDate();
+//void testStudent();
+
+void loadStudents(Std::vector<Student*>& students);void printStudents(std::vector<Student*>& students);
+void showStudentNames(std::vector<Student*>& students);
+void findStudent(std::vector<Student*>& students);
+void delStudents(std::vector<Student*>& students);
+std::string menu();
 
 int main(){
-  std::cout << "Hello!" << std::endl;
-  testAddress();
-  testDate();
-  testStudent();
-  return 0;
+  std::vector<Student*> students;
+
+  loadStudents(students);
+  std::string choice;
+
+  while (choice != "0"){
+	  choice = menu();
+
+	  if (choice == "1"){
+		  showStudentNames(students);
+	  }
+	  else if (choice == "2"){
+		  printStudents(students);
+	  }
+
+	  else if (choice == "3"){
+		  findStudent(students);
+	  } 
+	  else if (choice != "0"){
+		  std::cout << "Invalid choice" << std::endl;
+	  }
+	}
 } // end main
 
 void testAddress(){
