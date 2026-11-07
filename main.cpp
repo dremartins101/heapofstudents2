@@ -37,7 +37,67 @@ int main(){
 		  std::cout << "Invalid choice" << std::endl;
 	  }
 	}
+
+  delStudents(students);
+
+  return 0;
 } // end main
+
+void loadStudents(std::vector<Student*>& students){
+	std::ifstream file("students.csv");
+
+	if(!file.is_open()){
+		std::cout << "Error opening file" << std::endl;
+		return;
+	}
+
+	std::string line;
+
+	while (getline(file, line)){
+		Student* student = new Student();
+
+		student->init(line);
+		students.push_back(student);
+	}
+	file.close();
+}
+
+void priintStudents(std::vector<Student*>& students){
+	for(Student* student : students){
+		student->printStudent();
+
+		std::cout << "______________" << std::endl;
+	}
+}
+
+void showStudentNames(std::vector<Student*>& students){
+	for (Student* student : students){
+		std::cout << student -> getLastFirst() << std::endl;
+	}
+}
+
+void findStudent(std::vector<Student*>& students){
+	std::string searchName;
+
+	std::cout << "Last name of student : ";
+	getline(std::cin, searchName);
+
+	bool found = false;
+
+	for (Student* student : students){
+		if (student->getLastFirst().find(searchName)!= std::string::npos){
+			student->printStudent();
+
+			std::cout << "________________________" << std::endl;
+
+			found = true;
+		}
+	}
+
+	if (!found){
+		std::cout << "No students found" << std::endl;
+	}
+}
 
 void testAddress(){
   Address a;
