@@ -8,7 +8,7 @@
 //void testDate();
 //void testStudent();
 
-void loadStudents(Std::vector<Student*>& students);void printStudents(std::vector<Student*>& students);
+void loadStudents(std::vector<Student*>& students);void printStudents(std::vector<Student*>& students);
 void showStudentNames(std::vector<Student*>& students);
 void findStudent(std::vector<Student*>& students);
 void delStudents(std::vector<Student*>& students);
@@ -62,7 +62,7 @@ void loadStudents(std::vector<Student*>& students){
 	file.close();
 }
 
-void priintStudents(std::vector<Student*>& students){
+void printStudents(std::vector<Student*>& students){
 	for(Student* student : students){
 		student->printStudent();
 
@@ -97,6 +97,29 @@ void findStudent(std::vector<Student*>& students){
 	if (!found){
 		std::cout << "No students found" << std::endl;
 	}
+}
+
+std::string menu(){
+	std::string choice;
+	std::cout << std::endl;
+	std::cout << "0) quit" << std::endl;
+    std::cout << "1) print all student names" << std::endl;
+    std::cout << "2) print all student data" << std::endl;
+    std::cout << "3) find a student" << std::endl;
+    std::cout << std::endl;
+    std::cout << "Please choose 0-3: ";
+
+    getline(std::cin, choice);
+
+    return choice;
+}
+
+void delStudents(std::vector<Student*>& students){
+    for (Student* student : students){
+        delete student;
+    }
+
+    students.clear();
 }
 
 void testAddress(){

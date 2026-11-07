@@ -10,9 +10,9 @@ class Student {
 	private:
 		std::string firstName;
 		std::string lastName;
-		Address address;
-		Date birthDate;
-		Date gradDate;
+		Address* address;
+		Date* birthDate;
+		Date* gradDate;
 		int creditHours;
 	public:
 		Student();

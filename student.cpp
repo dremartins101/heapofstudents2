@@ -12,7 +12,17 @@ Student::Student(){
     firstName = "";
     lastName = "";
     creditHours = 0;
+
+    address = new Address();
+    birthDate = new Date();
+    gradDate = new Date();
 } // end constructor
+
+Student::~Student(){
+	delete address;
+	delete birthDate;
+	delete gradDate;
+}
 
 void Student::init(std::string studentString){
 	std::stringstream ss(studentString);
@@ -28,9 +38,9 @@ void Student::init(std::string studentString){
 	getline(ss, gday, ',');
 	getline(ss, credits, ',');
 
-	address.init(street, city, state, zip);
-	birthDate.init(bday);
-	gradDate.init(gday);
+	address->init(street, city, state, zip);
+	birthDate->init(bday);
+	gradDate->init(gday);
 
 	// convert credits to int
 	creditHours = std::stoi(credits);
@@ -38,11 +48,11 @@ void Student::init(std::string studentString){
 
 void Student::printStudent(){
 	std::cout << firstName << " " << lastName << std::endl;
-	address.printAddress();
+	address->printAddress();
 	std::cout << "DOB: ";
-	birthDate.printDate();
+	birthDate->printDate();
 	std::cout << "Grad: ";
-	gradDate.printDate();
+	gradDate->printDate();
 	std::cout << "Credits: " << creditHours << std::endl;
 } // end printstudent
 
